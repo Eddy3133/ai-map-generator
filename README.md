@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # AI Map Generator
 
 An interactive web application that generates custom maps using OpenAI's DALL-E 3 API. Users can describe the map they want, choose a style, and receive a unique AI-generated map visualization.
@@ -90,3 +91,6 @@ This project is licensed under the MIT License - see the LICENSE file for detail
 - OpenAI for providing the DALL-E 3 API
 - FastAPI for the backend framework
 - React and TypeScript for the frontend framework 
+=======
+# ai-map-generator
+>>>>>>> 1a15fe720536798e1313f809d1a96defa6f6ebbd
