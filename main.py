@@ -42,6 +42,17 @@ async def add_cors_headers(request: Request, call_next):
     response.headers["Access-Control-Allow-Headers"] = "Content-Type"
     return response
 
+@app.get("/")
+async def root():
+    return {"status": "healthy", "message": "AI Map Generator API is running"}
+
+@app.get("/health")
+async def health_check():
+    return {
+        "status": "healthy",
+        "openai_key": "configured" if os.getenv("OPENAI_API_KEY") else "missing"
+    }
+
 class MapRequest(BaseModel):
     prompt: str
     style: str
