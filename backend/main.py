@@ -6,30 +6,37 @@ import os
 from dotenv import load_dotenv
 import logging
 import traceback
+from fastapi.responses import JSONResponse
 
-# Set up logging
+# Load environment variables
+load_dotenv()
+
+# Configure logging
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 
-load_dotenv()
-
 app = FastAPI()
 
-# Enable CORS
+# More permissive CORS settings
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],  # In production, replace with your frontend URL
-    allow_origins=[
-        "https://artificial-intelligence-map-generator.netlify.app",  # Netlify domain
-        "https://eddy3133.github.io",  # GitHub Pages
-        "http://localhost:5173",       # Local development
-        "http://localhost:3000",       # Alternative local port
-        "https://www.edirinthegisdeveloper.com"  # Your portfolio site
-    ],
-    allow_credentials=True,
+    allow_origins=["*"],  # Allows all origins
+    allow_credentials=False,  # Changed to False since we're using allow_origins=["*"]
     allow_methods=["*"],
     allow_headers=["*"],
+    expose_headers=["*"]
 )
+
+@app.options("/generate-map")
+async def options_map():
+    return JSONResponse(
+        content={"message": "OK"},
+        headers={
+            "Access-Control-Allow-Origin": "*",
+            "Access-Control-Allow-Methods": "POST, OPTIONS",
+            "Access-Control-Allow-Headers": "Content-Type",
+        },
+    )
 
 class MapRequest(BaseModel):
     prompt: str
