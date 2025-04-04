@@ -66,11 +66,11 @@ async def generate_map(request: MapRequest):
             logger.info("Successfully generated image")
             return {"url": response["data"][0]["url"]}
             
-        except openai.error.AuthenticationError:
-            logger.error("OpenAI API authentication failed")
-            raise HTTPException(status_code=401, detail="OpenAI API authentication failed")
-        except openai.error.RateLimitError:
-            logger.error("OpenAI API rate limit exceeded")
+        except openai.error.AuthenticationError as e:
+            logger.error(f"OpenAI Authentication Error: {str(e)}")
+            raise HTTPException(status_code=401, detail="Invalid OpenAI API key")
+        except openai.error.RateLimitError as e:
+            logger.error(f"OpenAI Rate Limit Error: {str(e)}")
             raise HTTPException(status_code=429, detail="Rate limit exceeded")
         except Exception as e:
             logger.error(f"OpenAI API error: {str(e)}\n{traceback.format_exc()}")
