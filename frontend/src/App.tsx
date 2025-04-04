@@ -55,7 +55,9 @@ const theme = createTheme({
   },
 });
 
+// Hardcode the URL since env variable isn't working
 const API_URL = 'https://ai-map-generator-6ea864cf7c85.herokuapp.com';
+console.log('API URL:', API_URL);
 
 function App() {
   console.log('App component rendering...');
