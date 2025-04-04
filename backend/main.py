@@ -19,6 +19,13 @@ app = FastAPI()
 app.add_middleware(
     CORSMiddleware,
     allow_origins=["*"],  # In production, replace with your frontend URL
+    allow_origins=[
+        "https://artificial-intelligence-map-generator.netlify.app",  # Netlify domain
+        "https://eddy3133.github.io",  # GitHub Pages
+        "http://localhost:5173",       # Local development
+        "http://localhost:3000",       # Alternative local port
+        "https://www.edirinthegisdeveloper.com"  # Your portfolio site
+    ],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
