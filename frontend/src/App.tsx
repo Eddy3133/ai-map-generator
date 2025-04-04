@@ -55,6 +55,8 @@ const theme = createTheme({
   },
 });
 
+const API_URL = 'https://ai-map-generator-6ea864cf7c85.herokuapp.com';
+
 function App() {
   console.log('App component rendering...');
 
@@ -76,7 +78,7 @@ function App() {
 
     try {
       console.log('Sending request to backend...');
-      const response = await axios.post('http://localhost:8000/generate-map', {
+      const response = await axios.post(`${API_URL}/generate-map`, {
         prompt,
         style,
       });
